@@ -58,6 +58,16 @@ public class EmployeeController {
     }
 
     /**
+     * Get employees hired in a specific year
+     * GET /api/employees/hired-in/{year}
+     */
+    @GetMapping("/hired-in/{year}")
+    public ResponseEntity<List<Employee>> getEmployeesHiredInYear(@PathVariable Integer year) {
+        List<Employee> employees = employeeRepository.findEmployeesHiredInYear(year);
+        return ResponseEntity.ok(employees);
+    }
+
+    /**
      * Get employee by ID
      * GET /api/employees/{id}
      */

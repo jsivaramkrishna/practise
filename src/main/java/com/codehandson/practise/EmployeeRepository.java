@@ -22,5 +22,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
      */
     @Query("SELECT e FROM Employee e WHERE e.salary > :minSalary ORDER BY e.salary DESC")
     List<Employee> findEmployeesEarningMoreThan(@Param("minSalary") Double minSalary);
+
+    /**
+     * Query C: Find employees hired in a specific year
+     * 
+     * SQL Equivalent:
+     * SELECT * FROM employee WHERE EXTRACT(YEAR FROM hire_date) = ?
+     * ORDER BY hire_date DESC
+     */
+    @Query("SELECT e FROM Employee e WHERE YEAR(e.hireDate) = :year ORDER BY e.hireDate DESC")
+    List<Employee> findEmployeesHiredInYear(@Param("year") Integer year);
 }
 

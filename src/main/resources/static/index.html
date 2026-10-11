@@ -280,6 +280,10 @@
                     <button onclick="getAllEmployees()">📋 Get All</button>
                     <button onclick="getHighEarners()">💰 Salary > $80K</button>
                 </div>
+                <div class="button-group" style="margin-top: 10px;">
+                    <input type="number" id="yearInput" placeholder="Enter year (e.g., 2024)" min="2020" max="2099" style="width: 60%;">
+                    <button onclick="getEmployeesHiredInYear()" style="width: 40%;">📅 Hired in Year</button>
+                </div>
             </div>
 
             <!-- Results Section -->
@@ -371,6 +375,33 @@
             } catch (error) {
                 displayResults(`Error: ${error.message}`, 'error');
                 showMessage('resultMessage', '❌ Error loading high earners', 'error');
+            }
+        }
+
+        // Get Employees Hired in a Specific Year
+        async function getEmployeesHiredInYear() {
+            const year = document.getElementById('yearInput').value;
+            
+            if (!year) {
+                showMessage('resultMessage', '⚠️ Please enter a year', 'error');
+                return;
+            }
+
+            try {
+                showMessage('resultMessage', `Loading employees hired in ${year}...`, 'info');
+                const response = await fetch(`${API_URL}/hired-in/${year}`);
+                const employees = await response.json();
+
+                if (employees.length === 0) {
+                    displayResults(`No employees hired in ${year}`, 'empty');
+                    showMessage('resultMessage', `ℹ️ No employees found hired in ${year}`, 'info');
+                } else {
+                    displayEmployeeTable(employees, `Employees Hired in ${year} (${employees.length} found)`);
+                    showMessage('resultMessage', `✅ Found ${employees.length} employees hired in ${year}`, 'success');
+                }
+            } catch (error) {
+                displayResults(`Error: ${error.message}`, 'error');
+                showMessage('resultMessage', '❌ Error loading employees', 'error');
             }
         }
 
