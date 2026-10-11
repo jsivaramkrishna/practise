@@ -51,6 +51,9 @@ public class EmployeeQueryExamples implements CommandLineRunner {
             // Example 4: Display all employee details
             example4_DisplayAllEmployees();
             
+            // Example 5: Find employees earning more than $80,000
+            example5_FindEmployeesEarningMoreThan();
+            
             logger.info("=".repeat(70) + "\n");
             
         } catch (Exception e) {
@@ -168,6 +171,40 @@ public class EmployeeQueryExamples implements CommandLineRunner {
                 emp.getHireDate(),
                 emp.getCreatedAt()
             );
+        }
+    }
+    
+    /**
+     * EXAMPLE 5: Find employees earning more than $80,000
+     * 
+     * Hibernate/JPA way:
+     * List<Employee> highEarners = employeeRepository.findEmployeesEarningMoreThan(80000.0);
+     * 
+     * Equivalent SQL:
+     * SELECT * FROM employee WHERE salary > 80000 ORDER BY salary DESC;
+     */
+    private void example5_FindEmployeesEarningMoreThan() {
+        logger.info("\n📌 Example 5: Find Employees Earning > $80,000");
+        logger.info("Code: employeeRepository.findEmployeesEarningMoreThan(80000.0)");
+        logger.info("SQL:  SELECT * FROM employee WHERE salary > 80000 ORDER BY salary DESC;\n");
+        
+        List<Employee> highEarners = employeeRepository.findEmployeesEarningMoreThan(80000.0);
+        
+        if (highEarners.isEmpty()) {
+            logger.info("Result: No employees earning more than $80,000");
+        } else {
+            logger.info("Result: Found {} employees earning > $80,000\n", highEarners.size());
+            logger.info("Name                    | Email                      | Salary");
+            logger.info("-----------------------+----------------------------+-----------");
+            
+            for (Employee emp : highEarners) {
+                logger.info("{} {} | {} | ${}",
+                    String.format("%-10s", emp.getFirstName()),
+                    String.format("%-10s", emp.getLastName()),
+                    String.format("%-26s", emp.getEmail()),
+                    emp.getSalary()
+                );
+            }
         }
     }
 }

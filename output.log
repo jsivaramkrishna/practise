@@ -255,3 +255,6 @@ Hibernate:
 2026-10-12T02:55:48.506+05:30  INFO 71769 --- [practise] [           main] c.c.practise.EmployeeQueryExamples       :  3 | Bob        | Jones      | bob@email.com              | Active | 2024-03-10 | 2026-10-12T00:18:32.676181
 2026-10-12T02:55:48.506+05:30  INFO 71769 --- [practise] [           main] c.c.practise.EmployeeQueryExamples       : ======================================================================
 
+2026-10-12T03:10:23.146+05:30  INFO 71769 --- [practise] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-12T03:10:23.147+05:30  INFO 71769 --- [practise] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-12T03:10:23.150+05:30  INFO 71769 --- [practise] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
